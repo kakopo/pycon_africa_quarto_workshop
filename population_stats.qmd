@@ -1,0 +1,123 @@
+---
+title: "Population stats demo"
+author: Kirabo Atuhurira
+date: 07-10-2025
+format: pdf
+echo: false
+---
+
+# Using Python To Create Documents and Reproducible Reports with Quarto
+
+```{python}
+#| tags: [parameters]
+#| echo: false
+state = "California"
+```
+
+## Let's import the necessary packages for our report
+
+We're using pandas to explore and maniplulate our dataset. We'll use plotnine to generate the graphics.
+
+```{python}
+import pandas as pd
+from plotnine import *
+# import matplotlib.pyplot as plt
+```
+
+## Let's import our dataset
+
+We are using the [acs2017_county_data dataset](https://www.kaggle.com/datasets/muonneutrino/us-census-demographic-data?select=acs2017_county_data.csv), downloaded from Kaggle.
+
+```{python}
+data = pd.read_csv("~/Documents/pycon_africa/acs2017_county_data.csv")
+data.describe()
+```
+
+Here we are able to see the basic statistics of our dataset.
+
+```{python}
+# print("Columns available:", list(data.columns))
+```
+
+```{python}
+state_data = data[data["State"] == state]
+print(f"Number of counties in {state}: {len(state_data)}")
+```
+
+```{python}
+total_population = state_data["TotalPop"].sum()
+mean_population = state_data["TotalPop"].mean()
+largest_county_row = state_data.loc[state_data["TotalPop"].idxmax()]
+largest_county = largest_county_row["County"]
+largest_county_pop = largest_county_row["TotalPop"]
+```
+
+```{python}
+#| label: totals
+print(f"Total population (2017): {total_population:,.0f}")
+print(f"Average county population: {mean_population:,.0f}")
+print(f"Largest county: {largest_county} ({largest_county_pop:,.0f} people)")
+```
+
+```{python}
+(
+    ggplot(state_data.sort_values("TotalPop"), aes(x="County", y="TotalPop")) +
+    geom_col(fill="#007d79") +
+    coord_flip() +
+    labs(
+        title=f"Population by County - {state} (2017)",
+        x="County",
+        y="Population"
+    ) +
+    theme_minimal() +
+    theme(
+        figure_size=(5, 7),      # make plot taller
+        axis_text_y=element_text(size=10)  # smaller county names
+    )
+)
+```
+
+```{python}
+gender_data = state_data.melt(
+    id_vars=["County"],
+    value_vars=["Men", "Women"],
+    var_name="Gender",
+    value_name="Count"
+)
+
+(
+    ggplot(gender_data, aes(x="County", y="Count", fill="Gender")) +
+    geom_col(position=position_dodge()) +
+    coord_flip() +
+    labs(
+        title=f"Population by Gender and County - {state} (2017)",
+        x="County",
+        y="Population"
+    ) +
+    theme_minimal() +
+    theme(figure_size=(5, 7))
+)
+```
+
+```{python}
+(
+    ggplot(state_data, aes(x="Income", y="Poverty")) +
+    geom_point(color="#007d79", alpha=0.7) +
+    labs(
+        title=f"Relationship Between Income and Poverty - {state} (2017)",
+        x="Median Household Income (USD)",
+        y="Poverty Rate (%)"
+    ) +
+    theme_minimal() +
+    geom_smooth(method='lm', color='gray')
+)
+```
+
+```{python}
+summary = (
+    f"In 2017, {state} had a total population of {total_population:,.0f}, "
+    f"with an average county population of {mean_population:,.0f}. "
+    f"The most populous county was {largest_county} with {largest_county_pop:,.0f} residents."
+)
+print(summary)
+```

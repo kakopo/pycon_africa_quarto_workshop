@@ -1,0 +1,155 @@
+{
+  "cells": [
+    {
+      "cell_type": "raw",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Using Python To Create Documents and Reproducible Reports with Quarto\n",
+        "subtitle: Producing Reproducible Reports with Quarto\n",
+        "author: Kirabo Atuhurira\n",
+        "date: 07-10-2025\n",
+        "format:\n",
+        "  html: default\n",
+        "  pdf:\n",
+        "    execute:\n",
+        "      echo: false\n",
+        "      warning: false\n",
+        "      error: false\n",
+        "---"
+      ],
+      "id": "c879ebeb"
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Using Python To Create Documents and Reproducible Reports with Quarto\n",
+        "\n",
+        "\n",
+        "## Creating a document with population data\n",
+        "\n",
+        "We begin by loading the dataset and checking the first few rows."
+      ],
+      "id": "a05913c3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "df = pd.read_csv(\"~/Downloads/acs2017_county_data.csv\")\n",
+        "df.head()\n",
+        "# df.info()"
+      ],
+      "id": "4aa6a5f7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(df.columns)"
+      ],
+      "id": "911b5190",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now, let’s compute basic summary statistics."
+      ],
+      "id": "c298f09e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df['Income'].describe"
+      ],
+      "id": "8b03ca26",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Here is a histogram of income distribution."
+      ],
+      "id": "d124c091"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "figures = []\n",
+        "\n",
+        "# Plot 1: Histogram of Median Income\n",
+        "fig1 = plt.figure()\n",
+        "df['Income'].hist(bins=30)\n",
+        "plt.title('Distribution of Median Income')\n",
+        "plt.xlabel('Median Income')\n",
+        "plt.ylabel('Number of Counties')\n",
+        "figures.append(fig1)"
+      ],
+      "id": "b0b777f8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Plot 2: Scatter plot of Poverty vs. Income\n",
+        "fig2 = plt.figure()\n",
+        "plt.scatter(df['Income'], df['Poverty'], alpha=0.5)\n",
+        "plt.title('Poverty vs. Income')\n",
+        "plt.xlabel('Median Income')\n",
+        "plt.ylabel('Poverty Rate (%)')\n",
+        "figures.append(fig2)"
+      ],
+      "id": "c7c613b3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "<!-- ```{python}\n",
+        "# Plot 3: Pie chart of State distribution\n",
+        "df['State'].value_counts().head(10).plot(kind='pie', autopct='%1.1f%%', startangle=90)\n",
+        "plt.title('Top 10 States by Number of Counties')\n",
+        "plt.ylabel('')\n",
+        "plt.show()\n",
+        "``` -->\n",
+        "\n",
+        "<!-- ```{python}\n",
+        "# Plot 4: Pie chart of race distribution (average across all counties)\n",
+        "race_columns = ['White', 'Black', 'Asian', 'Pacific', 'Native', 'Hispanic']\n",
+        "average_race_distribution = df[race_columns].mean()\n",
+        "plt.figure()\n",
+        "average_race_distribution.plot(kind='pie', autopct='%1.1f%%', startangle=90)\n",
+        "plt.title('Average Racial Distribution Across Counties')\n",
+        "plt.ylabel('')\n",
+        "``` -->"
+      ],
+      "id": "a3854f51"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/kopo/.venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

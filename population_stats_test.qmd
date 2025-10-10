@@ -1,0 +1,120 @@
+---
+jupyter: python3
+title: "Population stats demo"
+author: Kirabo Atuhurira
+date: 07-10-2025
+format: pdf
+echo: false
+---
+
+```{python}
+state = "New York"
+```
+
+```{python}
+import pandas as pd
+from plotnine import ggplot, aes, geom_col, coord_flip, labs, theme_minimal
+import matplotlib.pyplot as plt
+```
+
+```{python}
+data = pd.read_csv("~/Documents/pycon_africa/acs2017_county_data.csv")
+data.describe()
+```
+
+```{python}
+print("Columns available:", list(data.columns))
+```
+
+```{python}
+state_data = data[data["State"] == state]
+print(f"Number of counties in {state}: {len(state_data)}")
+```
+
+```{python}
+total_population = state_data["TotalPop"].sum()
+mean_population = state_data["TotalPop"].mean()
+largest_county_row = state_data.loc[state_data["TotalPop"].idxmax()]
+largest_county = largest_county_row["County"]
+largest_county_pop = largest_county_row["TotalPop"]
+```
+
+```{python}
+print(f"Rows found for {state}: {len(state_data)}")
+```
+
+```{python}
+print(f"Total population (2017): {total_population:,.0f}")
+print(f"Average county population: {mean_population:,.0f}")
+print(f"Largest county: {largest_county} ({largest_county_pop:,.0f} people)")
+```
+
+```{python}
+from plotnine import theme, element_text
+
+(
+    ggplot(state_data.sort_values("TotalPop"), aes(x="County", y="TotalPop")) +
+    geom_col(fill="#007d79") +
+    coord_flip() +
+    labs(
+        title=f"Population by County - {state} (2017)",
+        x="County",
+        y="Population"
+    ) +
+    theme_minimal() +
+    theme(
+        figure_size=(10, 14),      # make plot taller
+        axis_text_y=element_text(size=10)  # smaller county names
+    )
+)
+```
+
+```{python}
+from plotnine import ggplot, aes, geom_col, coord_flip, labs, theme_minimal, theme, position_dodge
+
+gender_data = state_data.melt(
+    id_vars=["County"],
+    value_vars=["Men", "Women"],
+    var_name="Gender",
+    value_name="Count"
+)
+
+(
+    ggplot(gender_data, aes(x="County", y="Count", fill="Gender")) +
+    geom_col(position=position_dodge()) +
+    coord_flip() +
+    labs(
+        title=f"Population by Gender and County - {state} (2017)",
+        x="County",
+        y="Population"
+    ) +
+    theme_minimal() +
+    theme(figure_size=(10, 14))
+)
+```
+
+```{python}
+from plotnine import ggplot, aes, geom_point, labs, theme_minimal, geom_smooth
+
+(
+    ggplot(state_data, aes(x="Income", y="Poverty")) +
+    geom_point(color="#007d79", alpha=0.7) +
+    labs(
+        title=f"Relationship Between Income and Poverty - {state} (2017)",
+        x="Median Household Income (USD)",
+        y="Poverty Rate (%)"
+    ) +
+    theme_minimal() +
+    geom_smooth(method='lm', color='gray')
+)
+```
+
+```{python}
+summary = (
+    f"In 2017, {state} had a total population of {total_population:,.0f}, \n"
+    f"with an average county population of {mean_population:,.0f}.\n"
+    f"The most populous county was {largest_county} with {largest_county_pop:,.0f} residents."
+)
+print(summary)
+```
+

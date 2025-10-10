@@ -1,0 +1,81 @@
+---
+title: Using Python To Create Documents and Reproducible Reports with Quarto
+subtitle: Producing Reproducible Reports with Quarto
+author: Kirabo Atuhurira
+date: 07-10-2025
+format: html
+---
+## What is Quarto?
+
+-   [Quarto](https://quarto.org) is an open-source scientific and technical publishing system built for data analysis, reproducible research, and creating dynamic reports, websites, slides, books, dashboards, etc.
+
+-   It lets you combine code, output, and text in one place — like RMarkdown, but works with Python, R, Julia, and Observable JS.
+
+-   Think of it as a word processor + code execution + data visualization + automation tool
+
+-   You write in plain text using Markdown, embed code in blocks, and generate polished outputs (PDF, HTML, Word, etc.).
+
+# Why do we need this?
+
+-   Uganda Bureau of Statistics (UBOS) has faced issues in data reliability and public trust.
+
+-   In 2024, UBOS faced public scrutiny when it published Uganda census data with a significant data error. The publication data showed an unexpected decline in Bagisu and Acholi population, while the population of the Lango and Bacha increased significantly.[^1]
+
+-   Such an error could have been avoided had UBOS followed adequate data reproducible standards.
+
+[^1]: <https://www.monitor.co.ug/uganda/news/national/2024-census-data-was-unrealistic-and-manipulated-fdc-tells-ubos-4788522>
+
+# Enter Quarto
+
+With **Quarto**, scientists and statisticians can:
+
+1.  Report inconsistencies by tracing the exact code and data source used.
+
+2.  Avoid manual errors (copy and paste) by automating report generation.
+
+3.  Ensure **transparency** by sharing code openly.
+
+4.  Ensure proper collaboration via version control with Git.
+
+5.  Generate dynamic content than can be viewed as HTML, word, pdf or interactive dashboards.
+
+# Anatomy of a Quarto document
+
+> A Quarto document is made up of three major components:
+1. YAML Header
+
+2. Markdown text
+
+3. Code chunks
+
+> These all come together to create an output document. 
+
+# More on Quarto formatting
+
+> Let's look at how the different file formats can be created
+
+> As you can see, our work so far is generating a lot of files, so we are going to save them in a project formatting yml file.
+
+> To render the files, we would typically run the command, "quarto render demo.qmd"
+
+> To render one specific file, we would specify the command to accomodate this "quarto render demo.qmd --to pdf"
+
+# Code in Quarto
+
+```{python}
+print("Hello PyCon Africa!")
+```
+
+```{python}
+print(1+1)
+```
+
+```{python}
+# This code calculates the sum of two numbers
+a = 5
+b = 3
+print(f"The sum of the code is {a+b}")
+```
+
+# Visual Mode and More Markdown
+![A picture of Snoopy](Snoopy_Peanuts.png)

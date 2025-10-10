@@ -1,0 +1,77 @@
+---
+title: Using Python To Create Documents and Reproducible Reports with Quarto
+subtitle: Producing Reproducible Reports with Quarto
+author: Kirabo Atuhurira
+date: 07-10-2025
+format:
+  html: default
+  pdf:
+    execute:
+      echo: false
+      warning: false
+      error: false
+---
+# Using Python To Create Documents and Reproducible Reports with Quarto
+
+
+## Creating a document with population data
+
+We begin by loading the dataset and checking the first few rows.
+
+```{python}
+import pandas as pd
+df = pd.read_csv("~/Downloads/acs2017_county_data.csv")
+df.head()
+# df.info()
+```
+
+```{python}
+print(df.columns)
+```
+
+Now, let’s compute basic summary statistics.
+```{python}
+df['Income'].describe
+```
+
+Here is a histogram of income distribution.
+```{python}
+import matplotlib.pyplot as plt
+figures = []
+
+# Plot 1: Histogram of Median Income
+fig1 = plt.figure()
+df['Income'].hist(bins=30)
+plt.title('Distribution of Median Income')
+plt.xlabel('Median Income')
+plt.ylabel('Number of Counties')
+figures.append(fig1)
+```
+
+```{python}
+# Plot 2: Scatter plot of Poverty vs. Income
+fig2 = plt.figure()
+plt.scatter(df['Income'], df['Poverty'], alpha=0.5)
+plt.title('Poverty vs. Income')
+plt.xlabel('Median Income')
+plt.ylabel('Poverty Rate (%)')
+figures.append(fig2)
+```
+
+<!-- ```{python}
+# Plot 3: Pie chart of State distribution
+df['State'].value_counts().head(10).plot(kind='pie', autopct='%1.1f%%', startangle=90)
+plt.title('Top 10 States by Number of Counties')
+plt.ylabel('')
+plt.show()
+``` -->
+
+<!-- ```{python}
+# Plot 4: Pie chart of race distribution (average across all counties)
+race_columns = ['White', 'Black', 'Asian', 'Pacific', 'Native', 'Hispanic']
+average_race_distribution = df[race_columns].mean()
+plt.figure()
+average_race_distribution.plot(kind='pie', autopct='%1.1f%%', startangle=90)
+plt.title('Average Racial Distribution Across Counties')
+plt.ylabel('')
+``` -->
