@@ -20,7 +20,7 @@ We begin by loading the dataset and checking the first few rows.
 
 ```{python}
 import pandas as pd
-df = pd.read_csv("~/Downloads/acs2017_county_data.csv")
+df = pd.read_csv("acs2017_county_data.csv")
 df.head()
 # df.info()
 ```
