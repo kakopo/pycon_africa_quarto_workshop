@@ -4,14 +4,14 @@ This repository contains demo materials for the PyCon Africa workshop on **Quart
 
 ---
 
-## 📦 What is Quarto?
+## What is Quarto?
 
 [**Quarto**](https://quarto.org/) is an open-source publishing system that lets you create documents, presentations, and websites using Markdown, code, and notebooks.
 It supports **R**, **Python**, **Julia**, and **Observable JS**.
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 Before you begin, make sure you have:
 
