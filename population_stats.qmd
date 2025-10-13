@@ -29,7 +29,7 @@ from plotnine import *
 We are using the [acs2017_county_data dataset](https://www.kaggle.com/datasets/muonneutrino/us-census-demographic-data?select=acs2017_county_data.csv), downloaded from Kaggle.
 
 ```{python}
-data = pd.read_csv("~/Documents/pycon_africa/acs2017_county_data.csv")
+data = pd.read_csv("acs2017_county_data.csv")
 data.describe()
 ```
 
