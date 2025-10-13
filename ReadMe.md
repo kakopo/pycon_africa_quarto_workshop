@@ -1,4 +1,4 @@
-# 🧭 Running a Quarto Project
+# PyCon Africa Quarto Workshop
 
 This repository contains demo materials for the PyCon Africa workshop on **Quarto**, showing how to use Python to create reproducible reports and documents.
 
@@ -27,3 +27,9 @@ To confirm Quarto is installed:
 ```bash
 quarto check
 ```
+
+## 📦 Setup Instructions
+
+1. **Clone the repo**
+2. **Create and activate a virtual environment (recommended)**
+3. **Install dependencies**
