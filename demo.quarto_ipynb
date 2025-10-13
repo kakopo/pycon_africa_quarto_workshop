@@ -38,7 +38,7 @@
       "metadata": {},
       "source": [
         "import pandas as pd\n",
-        "df = pd.read_csv(\"~/Downloads/acs2017_county_data.csv\")\n",
+        "df = pd.read_csv(\"acs2017_county_data.csv\")\n",
         "df.head()\n",
         "# df.info()"
       ],
