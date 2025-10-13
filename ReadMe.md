@@ -1,6 +1,6 @@
 # 🧭 Running a Quarto Project
 
-This guide explains how to set up and run a **Quarto** file (`.qmd`) to render reports, dashboards, or websites.
+This repository contains demo materials for the PyCon Africa workshop on **Quarto**, showing how to use Python to create reproducible reports and documents.
 
 ---
 
@@ -15,9 +15,12 @@ It supports **R**, **Python**, **Julia**, and **Observable JS**.
 
 Before you begin, make sure you have:
 
-- **Quarto** installed → [Download here](https://quarto.org/docs/get-started/)
-- **Python** or (depending on your project)
-- An editor such as **VS Code**, **RStudio**, or **Jupyter**
+- [Python 3.8+](https://www.python.org/downloads/)
+- [VSCode](https://code.visualstudio.com/) with:
+  - Python extension
+  - Quarto extension
+- [Quarto CLI](https://quarto.org/docs/get-started/)
+- [LaTeX](https://quarto.org/docs/output-formats/pdf-engine.html#installing-tinytex) (TinyTeX recommended for PDF output)
 
 To confirm Quarto is installed:
 
