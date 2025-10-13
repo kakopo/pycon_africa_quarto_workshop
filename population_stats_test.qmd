@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 ```
 
 ```{python}
-data = pd.read_csv("~/Documents/pycon_africa/acs2017_county_data.csv")
+data = pd.read_csv("acs2017_county_data.csv")
 data.describe()
 ```
 
