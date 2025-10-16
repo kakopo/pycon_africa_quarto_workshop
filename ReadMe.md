@@ -31,4 +31,14 @@ quarto check
 
 1. **Clone the repo**
 2. **Create and activate a virtual environment (recommended)**
+> python3 -m venv venv
+
+## Activate it (Mac/Linux)
+> source venv/bin/activate
+
+## On Windows (PowerShell)
+> venv\Scripts\Activate
+
 3. **Install dependencies**
+> python3 -m pip install -r requirements.txt
+
