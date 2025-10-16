@@ -27,7 +27,7 @@ To confirm Quarto is installed:
 quarto check
 ```
 
-## 📦 Setup Instructions
+## Setup Instructions
 
 1. **Clone the repo**
    
