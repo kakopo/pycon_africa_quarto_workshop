@@ -19,7 +19,6 @@ Before you begin, make sure you have:
 - [VSCode](https://code.visualstudio.com/) with:
   - Python extension
   - Quarto extension
-- [Quarto CLI](https://quarto.org/docs/get-started/)
 - [LaTeX](https://quarto.org/docs/output-formats/pdf-engine.html#installing-tinytex) (TinyTeX recommended for PDF output)
 
 To confirm Quarto is installed:
